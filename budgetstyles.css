@@ -1,0 +1,29 @@
+.mainbudget {
+    border: 2px solid green;
+    background-color: rgb(241, 255, 241);
+    padding: 20px;
+}
+
+.mainexpense {
+    border: 2px solid red;
+    background-color: rgb(255, 245, 245);
+    padding: 20px;
+}
+
+.budgettotal {
+    color: green;
+    font-size: 50px;
+    font-weight: 700;
+}
+
+.expensetotal {
+    color: red;
+    font-size: 50px;
+    font-weight: 700;
+}
+
+.balancetotal  {
+    color: black;
+    font-size: 50px;
+    font-weight: 700;
+}
