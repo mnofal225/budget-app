@@ -43,13 +43,13 @@
                             <h2>Expenses</h2>
                             <div class="mb-3">
                                 <label for="expensename" class="form-label">Please Enter Expense Name</label>
-                                <input type="text" class="form-control" id="expensename" placeholder="ex. Groceries">
+                                <input type="text" class="form-control" id="expensename" value="Groceries">
                             </div>
                             <div class="mb-3">
                                 <label for="expenseamount" class="form-label">Please Enter Expense Amount</label>
-                                <input type="number" class="form-control" id="expenseamount mb-5" placeholder="ex. 100"></input>
+                                <input type="number" class="form-control" id="expenseamount" value="100"></input>
                             </div>
-                            <button type="button" class="btn btn-danger">Add Expense</button>
+                            <button type="button" class="btn btn-danger" id="addexpensebtn">Add Expense</button>
                         </div>
                     </div>
 
@@ -78,16 +78,16 @@
                                 <i class="fa-solid fa-hand-holding-dollar fa-3x"></i>
                                 <div class="balancetotal">
                                     <span>$</span>
-                                    <span id="balancetotal">0</span>            
+                                    <span id="balancetotal" value="0">0</span>            
                                 </div>
                               </div>
                             </div>
                             <!-- expense items and amount -->
                             <div class="row mt-5">
                                 <div class="col">
-                                  <h5>Expense Name</h5>
-                                  <div class="expensename" >
-                                      <ul id="expensename"></ul>          
+                                  <h5>Expense Title</h5>
+                                  <div class="expensetitle" >
+                                      <ul id="expensetitle"></ul>          
                                   </div>
                                 </div>
                                 <div class="col">
