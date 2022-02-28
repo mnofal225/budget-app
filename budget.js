@@ -8,6 +8,7 @@ const addExpenseBtn = document.querySelector('#addexpensebtn');
 const expenseTotal = document.querySelector('#expensetotal');
 const expenseTitle = document.querySelector('#expensetitle');
 const expenseValue = document.querySelector('#expensevalue');
+const editAndDelete = document.querySelector('#editanddelete');
 
 
 const getBudgetAmount = budgetCalculateBtn.addEventListener('click', ()=> {
@@ -20,19 +21,24 @@ const getBudgetAmount = budgetCalculateBtn.addEventListener('click', ()=> {
 const addExpensesList = addExpenseBtn.addEventListener('click', () => {
     let name = document.createElement('li') ;
     let value = document.createElement('li');
+    let options = document.createElement('li');
+    let editItem = document.createElement('a');
+    let deleteItem = document.createElement('a');
 
-    expenseTotal.innerText = expenseAmount.value;
-    expenseTitle.innerText = expenseName.value;
-    expenseValue.innerText = expenseAmount.value;
+    expenseTitle.append(name);
+    expenseValue.append(value);
+    //editAndDelete.append(options).appendChild(editItem,deleteItem);
 
-    calculateBalance();
-
+    
+    name.innerText = expenseName.value;
+    value.innerText = expenseAmount.value;
+    
+    calculateBalanceTotal();
+    calculateExpenseTotal();
 })
 
-console.log('balancetotal', balanceTotal.innerText);
-console.log('expense amount',expenseAmount.value);
 
-calculateBalance = ()=> {
+calculateBalanceTotal = ()=> {
     let total = 0;
     let numBalanceTotal =  parseFloat(balanceTotal.innerText);
     let numExpenseAmount = parseFloat(expenseAmount.value)
@@ -40,9 +46,14 @@ calculateBalance = ()=> {
     total = numBalanceTotal - numExpenseAmount;
 
     return balanceTotal.innerHTML = total;
-
 }
 
+calculateExpenseTotal = ()=> {
+    let total = 0;
+    let numExpenseTotal =  parseFloat(expenseTotal.innerText);
+    let numExpenseAmount = parseFloat(expenseAmount.value)
 
+    total = numExpenseTotal + numExpenseAmount;
 
-
+    return expenseTotal.innerText = total;
+}
