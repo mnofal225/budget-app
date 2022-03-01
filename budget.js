@@ -14,24 +14,27 @@ const editAndDelete = document.querySelector('#editanddelete');
 const getBudgetAmount = budgetCalculateBtn.addEventListener('click', ()=> {
     event.preventDefault();
     budgetTotal.innerText = budgetAmount.value;
-    balanceTotal.innerText = budgetAmount.value;
+    balanceTotal.innerText = parseFloat(budgetAmount.value) - parseFloat(expenseTotal.innerText);
 }) 
 
 
 const addExpensesList = addExpenseBtn.addEventListener('click', () => {
     let name = document.createElement('li') ;
     let value = document.createElement('li');
+
     let options = document.createElement('li');
     let editItem = document.createElement('a');
     let deleteItem = document.createElement('a');
 
-    expenseTitle.append(name);
-    expenseValue.append(value);
-    //editAndDelete.append(options).appendChild(editItem,deleteItem);
+    expenseTitle.appendChild(name);
+    expenseValue.appendChild(value);
+    let appendOptions =  editAndDelete.appendChild(options);
+    let appendEandD = appendOptions.appendChild(editItem,deleteItem);
 
-    
+
     name.innerText = expenseName.value;
     value.innerText = expenseAmount.value;
+    
     
     calculateBalanceTotal();
     calculateExpenseTotal();
