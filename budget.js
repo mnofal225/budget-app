@@ -9,6 +9,7 @@ const expenseTotal = document.querySelector('#expensetotal');
 const expenseTitle = document.querySelector('#expensetitle');
 const expenseValue = document.querySelector('#expensevalue');
 const editAndDelete = document.querySelector('#editanddelete');
+let expenseList = [];
 
 
 const getBudgetAmount = budgetCalculateBtn.addEventListener('click', ()=> {
@@ -28,20 +29,25 @@ const addExpensesList = addExpenseBtn.addEventListener('click', () => {
 
     expenseTitle.appendChild(name);
     expenseValue.appendChild(value);
+
     let appendOptions =  editAndDelete.appendChild(options);
-    let appendEandD = appendOptions.appendChild(editItem,deleteItem);
+    let appendDelete = appendOptions.appendChild(deleteItem);
+    let appendEdit = appendOptions.appendChild(editItem);
 
 
     name.innerText = expenseName.value;
     value.innerText = expenseAmount.value;
-    
+    appendDelete.innerText = 'delete'
+    appendEdit.innerText = ' edit'
+
     
     calculateBalanceTotal();
     calculateExpenseTotal();
+    listTracker(expenseName, expenseAmount);
 })
 
 
-calculateBalanceTotal = ()=> {
+let calculateBalanceTotal = ()=> {
     let total = 0;
     let numBalanceTotal =  parseFloat(balanceTotal.innerText);
     let numExpenseAmount = parseFloat(expenseAmount.value)
@@ -51,7 +57,7 @@ calculateBalanceTotal = ()=> {
     return balanceTotal.innerHTML = total;
 }
 
-calculateExpenseTotal = ()=> {
+let calculateExpenseTotal = ()=> {
     let total = 0;
     let numExpenseTotal =  parseFloat(expenseTotal.innerText);
     let numExpenseAmount = parseFloat(expenseAmount.value)
@@ -60,3 +66,19 @@ calculateExpenseTotal = ()=> {
 
     return expenseTotal.innerText = total;
 }
+
+let listTracker = (name, value) => {
+
+ let itemName = name.value;
+ let itemValue = parseFloat(value.value);
+
+ expenseList.push({name : itemName, value: itemValue})
+ console.log(expenseList)
+}
+
+// we need to implement edit delete
+// lets just focus on delete funciton 
+// we need to enable a way to track the expenses 
+    //and if they press delete to delete that array
+
+
