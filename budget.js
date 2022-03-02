@@ -23,22 +23,29 @@ const addExpensesList = addExpenseBtn.addEventListener('click', () => {
     let name = document.createElement('li') ;
     let value = document.createElement('li');
 
-    let options = document.createElement('li');
-    let editItem = document.createElement('a');
-    let deleteItem = document.createElement('a');
-
     expenseTitle.appendChild(name);
     expenseValue.appendChild(value);
 
+    let options = document.createElement('li');
     let appendOptions =  editAndDelete.appendChild(options);
-    let appendDelete = appendOptions.appendChild(deleteItem);
+
+    let editItem = document.createElement('a');
+    editItem.href = '#';
+    editItem.innerText = 'edit ';
+    editItem.addEventListener('click', editItemFunc());
     let appendEdit = appendOptions.appendChild(editItem);
+    
+    
+    let deleteItem = document.createElement('a');
+    deleteItem.href = '#';
+    deleteItem.innerText = 'delete';
+    deleteItem.addEventListener('click', () => { deleteItemFunc(options) });
+    let appendDelete = appendOptions.appendChild(deleteItem);
+    
 
 
     name.innerText = expenseName.value;
     value.innerText = expenseAmount.value;
-    appendDelete.innerText = 'delete'
-    appendEdit.innerText = ' edit'
 
     
     calculateBalanceTotal();
@@ -76,9 +83,14 @@ let listTracker = (name, value) => {
  console.log(expenseList)
 }
 
-// we need to implement edit delete
-// lets just focus on delete funciton 
-// we need to enable a way to track the expenses 
-    //and if they press delete to delete that array
+let editItemFunc = () => {
+
+}
+
+let deleteItemFunc = (item) => {
+    if(item.parentNode){
+        item.parentNode.removeChild(item);
+    }
+}
 
 
