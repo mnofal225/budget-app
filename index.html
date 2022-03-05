@@ -29,61 +29,67 @@
             </nav>
             <div class="container">
                 <div class="row">
-                    <!-- right side -->
+                    <!-- top side -->
                     <div class="col mt-5">
                         <div class="mainbudget mb-5">
                             <h2>Budget</h2>
                             <div class="mb-3">
                                 <label for="budget" class="form-label">Please Enter Your Budget</label>
-                                <input type="number" class="form-control" id="budgetAmount" placeholder='ex. 1000'>
+                                <input type="number" class="form-control" id="budgetAmount" placeholder="ex. 1000">
                             </div>
                             <button type="button" class="btn btn-success" id="budgetCalculateBtn">Calculate</button>
                         </div>  
+                    </div>
+                    <div class="col mt-5">
+                        <div class="container">
+                            <div class="row flex-nowrap">
+                                <div class="col">
+                                    <h3>Budget</h3>
+                                    <i class="fa-solid fa-money-bill-wave fa-3x"></i>
+                                    <div class="budgettotal" >
+                                        <span>$</span>
+                                        <span id="budgettotal">0</span>            
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <h3>Expenses</h3>
+                                    <i class="fa-solid fa-credit-card fa-3x"></i>
+                                    <div class="expensetotal">
+                                        <span>$</span>
+                                        <span id="expensetotal">0</span>            
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <h3>Balance</h3>
+                                    <i class="fa-solid fa-hand-holding-dollar fa-3x"></i>
+                                    <div class="balancetotal">
+                                        <span>$</span>
+                                        <span id="balancetotal" value="0">0</span>            
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col mt-5">
                         <div class="mainexpense">
                             <h2>Expenses</h2>
                             <div class="mb-3">
                                 <label for="expensename" class="form-label">Please Enter Expense Name</label>
-                                <input type="text" class="form-control" id="expensename" value="Groceries">
+                                <input type="text" class="form-control" id="expensename" placeholder="ex. Groceries">
                             </div>
                             <div class="mb-3">
                                 <label for="expenseamount" class="form-label">Please Enter Expense Amount</label>
-                                <input type="number" class="form-control" id="expenseamount" value="100"></input>
+                                <input type="number" class="form-control" id="expenseamount"  placeholder="ex. 100"></input>
                             </div>
                             <button type="button" class="btn btn-danger" id="addexpensebtn">Add Expense</button>
                         </div>
                     </div>
-
-                    <!-- left side -->
                     <div class="col mt-5">
                         <div class="container">
-                            <div class="row">
-                              <div class="col">
-                                <h3>Budget</h3>
-                                <i class="fa-solid fa-money-bill-wave fa-3x"></i>
-                                <div class="budgettotal" >
-                                    <span>$</span>
-                                    <span id="budgettotal">0</span>            
-                                </div>
-                              </div>
-                              <div class="col">
-                                <h3>Expenses</h3>
-                                <i class="fa-solid fa-credit-card fa-3x"></i>
-                                <div class="expensetotal">
-                                    <span>$</span>
-                                    <span id="expensetotal">0</span>            
-                                </div>
-                              </div>
-                              <div class="col">
-                                <h3>Balance</h3>
-                                <i class="fa-solid fa-hand-holding-dollar fa-3x"></i>
-                                <div class="balancetotal">
-                                    <span>$</span>
-                                    <span id="balancetotal" value="0">0</span>            
-                                </div>
-                              </div>
-                            </div>
-                            <!-- expense items and amount -->
-                            <div class="row mt-5">
+                            <div class="row flex-nowrap">
                                 <div class="col">
                                   <h5>Expense Title</h5>
                                   <div class="expensetitle" >
@@ -102,13 +108,12 @@
                                         <ul id="editanddelete"></ul>
                                     </div>
                                   </div>
-                              </div>
-                          </div>                          
+                                </div>
+                            </div>                          
+                        </div>
                     </div>
-
-                </div>
+                </div>   
             </div>
-        </div>
         
         <script src="budget.js" async defer></script>
         <script src="https://kit.fontawesome.com/21373326ce.js" crossorigin="anonymous"></script>
