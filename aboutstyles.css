@@ -1,0 +1,36 @@
+ html {
+    box-sizing: border-box;
+  }
+  
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+
+  .ourteamtitle{
+    text-align: center;
+  }
+  
+  .card{
+    box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: 8px;
+    
+  }
+  
+  .about-section {
+    padding: 50px;
+    text-align: center;
+    background-color: #474e5d;
+    color: white;
+  }
+  
+  .title {
+    color: grey;
+  }
+
+  .profileimg {
+    height: 200px;
+    width: 200px;
+    border-radius: .25rem;
+    margin-left: 16px;
+    margin-top: 16px;
+  }
