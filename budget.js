@@ -45,6 +45,7 @@ const populateList = (arr) => {
     expenseValue.appendChild(itemValue);
   }
 };
+
 const deleteItemFunc = (arr, expenseDetails) => {
     for (let i = 0; i < arr.length; i++) {
         if (arr[i].id === expenseDetails.id) {
@@ -57,10 +58,26 @@ const deleteItemFunc = (arr, expenseDetails) => {
     }
 };
 
+const editItemFunc = (arr, expenseDetails) => {
+    let removedItem = [];
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i].id === expenseDetails.id) {
+        removedItem = arr.splice(i, 1);
+        console.log(removedItem[0]);
+        expenseTitle.removeChild(expenseTitle.children[i]);
+        expenseValue.removeChild(expenseValue.children[i]);
+        editAndDelete.removeChild(editAndDelete.children[i]);
+        calculateExpenseAndBalanceTotal();
+        expenseName.value = removedItem[0].name;
+        expenseAmount.value = removedItem[0].value;;
+        }
+    }
+}
+
 const addExpensesList = addExpenseBtn.addEventListener("click", () => {
   event.preventDefault();
   let counter = 1 + expenseList.length;
-  let expenseDetails = {
+  const expenseDetails = {
     name: expenseName.value,
     value: parseFloat(expenseAmount.value),
     id: counter,
@@ -72,31 +89,24 @@ const addExpensesList = addExpenseBtn.addEventListener("click", () => {
   let appendOptions = editAndDelete.appendChild(options);
 
   let deleteItem = document.createElement("a");
-  deleteItem.href = "#";
-  deleteItem.innerText = "delete";
-  deleteItem.addEventListener("click", () => {
-    deleteItemFunc(expenseList, expenseDetails);
-  });
-  appendOptions.appendChild(deleteItem);
+    deleteItem.href = "#";
+    deleteItem.innerText = "delete";
+    deleteItem.addEventListener("click", () => {
+        deleteItemFunc(expenseList, expenseDetails);
+    });
+    appendOptions.appendChild(deleteItem);
+
+  let editItem = document.createElement('a');
+    editItem.href = '#';
+    editItem.innerText = ' edit';
+    editItem.addEventListener('click', () => {
+        editItemFunc(expenseList, expenseDetails);
+    });
+    let appendEdit = appendOptions.appendChild(editItem);
 
   calculateExpenseAndBalanceTotal();
 });
 
 
 
-// let editItem = document.createElement('a');
-// editItem.href = '#';
-// editItem.innerText = ' edit';
-// editItem.addEventListener('click', () => {
-//     editItemFunc(expenseDetails)
-// });
-// let appendEdit = appendOptions.appendChild(editItem);
 
-// let editItemFunc = (expdet) => {
-//     for(let i = 0; i < expenseList.length; i++){
-//         if(expenseList[i].id == expdet.id){
-//             expenseList.splice(i, 1,  )
-//             console.log('edit init', expenseList);
-//         }
-//     }
-// }
