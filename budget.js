@@ -15,6 +15,7 @@ const getBudgetAmount = budgetCalculateBtn.addEventListener("click", () => {
   event.preventDefault();
   budgetTotal.innerText = budgetAmount.value;
   calculateBalanceTotal();
+  budgetAmount.value = '';
 });
 
 const calculateExpenseTotal = () => {
@@ -84,6 +85,8 @@ const addExpensesList = addExpenseBtn.addEventListener("click", () => {
   };
   expenseList.push(expenseDetails);
   populateList(expenseList);
+  expenseName.value = ''
+  expenseAmount.value = '';
 
   let options = document.createElement("li");
   let appendOptions = editAndDelete.appendChild(options);
