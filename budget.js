@@ -15,8 +15,25 @@ const getBudgetAmount = budgetCalculateBtn.addEventListener("click", () => {
   event.preventDefault();
   budgetTotal.innerText = budgetAmount.value;
   calculateBalanceTotal();
-  
 });
+
+const calculateExpenseTotal = () => {
+    let expenseSum  = 0 ;
+    expenseList.forEach(expense => {
+        expenseSum += expense.value
+    })
+    return expenseTotal.innerText = expenseSum;
+};
+
+const calculateBalanceTotal = () => {
+    balanceTotal.innerText = 
+      parseFloat(budgetTotal.innerText) - parseFloat(expenseTotal.innerText);
+};
+
+const calculateExpenseAndBalanceTotal = () => {
+    calculateExpenseTotal();
+    calculateBalanceTotal();
+};
 
 const populateList = (arr) => {
   let itemName = document.createElement("li");
@@ -28,6 +45,17 @@ const populateList = (arr) => {
     expenseValue.appendChild(itemValue);
   }
 };
+const deleteItemFunc = (arr, expenseDetails) => {
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i].id === expenseDetails.id) {
+        arr.splice(i, 1);
+        expenseTitle.removeChild(expenseTitle.children[i]);
+        expenseValue.removeChild(expenseValue.children[i]);
+        editAndDelete.removeChild(editAndDelete.children[i]);
+        calculateExpenseAndBalanceTotal();
+        }
+    }
+};
 
 const addExpensesList = addExpenseBtn.addEventListener("click", () => {
   event.preventDefault();
@@ -38,7 +66,6 @@ const addExpensesList = addExpenseBtn.addEventListener("click", () => {
     id: counter,
   };
   expenseList.push(expenseDetails);
-
   populateList(expenseList);
 
   let options = document.createElement("li");
@@ -48,43 +75,14 @@ const addExpensesList = addExpenseBtn.addEventListener("click", () => {
   deleteItem.href = "#";
   deleteItem.innerText = "delete";
   deleteItem.addEventListener("click", () => {
-    deleteItemFunc(expenseList);
+    deleteItemFunc(expenseList, expenseDetails);
   });
   appendOptions.appendChild(deleteItem);
 
-  let deleteItemFunc = (arr) => {
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[i].id === expenseDetails.id) {
-        arr.splice(i, 1);
-        expenseTitle.removeChild(expenseTitle.children[i]);
-        expenseValue.removeChild(expenseValue.children[i]);
-        editAndDelete.removeChild(editAndDelete.children[i]);
-        calculateExpenseTotal();
-        calculateBalanceTotal();
-        
-      }
-    }
-  };
-  calculateExpenseTotal();
-  calculateBalanceTotal();
-  
+  calculateExpenseAndBalanceTotal();
 });
 
-// calculates the balance total
-let calculateBalanceTotal = () => {
-  balanceTotal.innerText = 
-    parseFloat(budgetTotal.innerText) - parseFloat(expenseTotal.innerText);
-};
 
-// calculates the expense total
-let calculateExpenseTotal = () => {
-    let expenseSum  = 0 ;
-    expenseList.forEach(expense => {
-        expenseSum += expense.value
-    })
-    return expenseTotal.innerText = expenseSum;
-
-};
 
 // let editItem = document.createElement('a');
 // editItem.href = '#';
