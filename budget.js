@@ -39,6 +39,8 @@ const calculateExpenseAndBalanceTotal = () => {
 const populateList = (arr) => {
   let itemName = document.createElement("li");
   let itemValue = document.createElement("li");
+  itemName.className = 'itemname'
+  itemValue.className = 'itemvalue'
   for (i = 0; i < arr.length; i++) {
     itemName.innerText = arr[i].name;
     itemValue.innerText = arr[i].value;
@@ -73,7 +75,15 @@ const editItemFunc = (arr, expenseDetails) => {
         expenseAmount.value = removedItem[0].value;;
         }
     }
-}
+};
+
+const budgetErrorHandling = () => {
+
+};
+
+const expenseErrorHandling = ()=> {
+
+};
 
 const addExpensesList = addExpenseBtn.addEventListener("click", () => {
   event.preventDefault();
@@ -94,6 +104,7 @@ const addExpensesList = addExpenseBtn.addEventListener("click", () => {
   let deleteItem = document.createElement("a");
     deleteItem.href = "#";
     deleteItem.innerText = "delete";
+    deleteItem.className = "deleteitem";
     deleteItem.addEventListener("click", () => {
         deleteItemFunc(expenseList, expenseDetails);
     });
@@ -102,6 +113,7 @@ const addExpensesList = addExpenseBtn.addEventListener("click", () => {
   let editItem = document.createElement('a');
     editItem.href = '#';
     editItem.innerText = ' edit';
+    editItem.className = 'edititem'
     editItem.addEventListener('click', () => {
         editItemFunc(expenseList, expenseDetails);
     });
