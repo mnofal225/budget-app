@@ -14,6 +14,12 @@ let expenseList = [];
 const getBudgetAmount = budgetCalculateBtn.addEventListener("click", () => {
   event.preventDefault();
   budgetTotal.innerText = budgetAmount.value;
+    if(budgetAmount.value <= 0) {
+      alert('The budget amount can be zero or less');
+      budgetTotal.innerText = 0;
+    }else{
+      budgetTotal.innerText = budgetAmount.value;
+    }
   calculateBalanceTotal();
   budgetAmount.value = '';
 });
@@ -77,11 +83,17 @@ const editItemFunc = (arr, expenseDetails) => {
     }
 };
 
-const budgetErrorHandling = () => {
-
+const budgetErrorHandling = (inputBudget) => {
+//if user inputs 0 or negative number, create alert, otherwise continue
+  if(inputBudget.value <= 0) {
+    alert('The budget amount can be zero or less');
+    budgetTotal.innerText = 0;
+  }else{
+    budgetTotal.innerText = inputBudget.value;
+  }
 };
 
-const expenseErrorHandling = ()=> {
+const expenseErrorHandling = (inputName, inputAmount)=> {
 
 };
 
