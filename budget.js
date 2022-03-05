@@ -10,8 +10,7 @@ const expenseTitle = document.querySelector('#expensetitle');
 const expenseValue = document.querySelector('#expensevalue');
 const editAndDelete = document.querySelector('#editanddelete');
 let expenseList = [];
-let isDeleteClicked = false;
-let isEditClicked = false;
+let testlist = [];
 
 
 const getBudgetAmount = budgetCalculateBtn.addEventListener('click', ()=> {
@@ -20,51 +19,64 @@ const getBudgetAmount = budgetCalculateBtn.addEventListener('click', ()=> {
     balanceTotal.innerText = parseFloat(budgetAmount.value) - parseFloat(expenseTotal.innerText);
 }) 
 
+const populateList = (arr) => {
+    let itemName = document.createElement('li') ;
+    let itemValue = document.createElement('li');
+    for(i = 0; i < arr.length; i++){
+        itemName.innerText = arr[i].name
+        itemValue.innerText = arr[i].value
+        expenseTitle.appendChild(itemName);
+        expenseValue.appendChild(itemValue);
+    }
+    
+    console.log('m',arr);
+}
 
 const addExpensesList = addExpenseBtn.addEventListener('click', () => {
-    let name = document.createElement('li') ;
-    let value = document.createElement('li');
-
-    expenseTitle.appendChild(name);
-    expenseValue.appendChild(value);
-    
-    value.innerText = expenseAmount.value;
-
-    let listTracker = (itemName, itemValue) => {
-        let counter = 1 + expenseList.length;
-        itemName.innerText = expenseName.value;
-        itemValue.innerText = parseFloat(expenseAmount.value);
-       
-        expenseList.push({name : itemName.innerText, value: parseFloat(itemValue.innerText), id: counter})
-        console.log(expenseList)
+    event.preventDefault();
+    let counter = 1 + expenseList.length;
+    let  expenseDetails = {
+        name : expenseName.value, 
+        value: parseFloat(expenseAmount.value), 
+        id: counter
     }
+    expenseList.push(expenseDetails);
 
 
+    populateList(expenseList);
 
-    // let options = document.createElement('li');
-    // let appendOptions =  editAndDelete.appendChild(options);
+    
 
-    // let editItem = document.createElement('a');
-    // editItem.href = '#';
-    // editItem.innerText = 'edit ';
-    // editItem.addEventListener('click', editItemFunc());
-    // let appendEdit = appendOptions.appendChild(editItem);
+    let options = document.createElement('li');
+    let appendOptions =  editAndDelete.appendChild(options);
+
     
-    
-    // let deleteItem = document.createElement('a');
-    // deleteItem.href = '#';
-    // deleteItem.innerText = 'delete';
-    // deleteItem.addEventListener('click', () => { isDeleteClicked = true , deleteItemFunc(options) });
-    // let appendDelete = appendOptions.appendChild(deleteItem);
-    
-    
+    let deleteItem = document.createElement('a');
+    deleteItem.href = '#';
+    deleteItem.innerText = 'delete';
+    deleteItem.addEventListener('click', () => { 
+        deleteItemFunc(expenseList) 
+    });
+    appendOptions.appendChild(deleteItem);
+
+    let deleteItemFunc = (arr) => {
+        for(let i = 0; i < arr.length; i++){
+            if(arr[i].id === expenseDetails.id){
+                arr.splice(i, 1)
+                console.log('splice init', arr);
+                expenseTitle.removeChild(expenseTitle.children[i]);
+                expenseValue.removeChild(expenseValue.children[i]);
+                editAndDelete.removeChild(editAndDelete.children[i]);
+            }
+        }    
+    }
+   
     calculateBalanceTotal();
     calculateExpenseTotal();
-    listTracker(name, value);
 })
 
 // calculates the balance total 
-let calculateBalanceTotal = ()=> {
+let calculateBalanceTotal = () => {
     let total = 0;
     let numBalanceTotal =  parseFloat(balanceTotal.innerText);
     let numExpenseAmount = parseFloat(expenseAmount.value)
@@ -85,28 +97,55 @@ let calculateExpenseTotal = ()=> {
     return expenseTotal.innerText = total;
 }
 
-// tracks the list of expenses 
-// let listTracker = (name, value) => {
-//  let counter = 1 + expenseList.length;
-//  let itemName = name.value;
-//  let itemValue = parseFloat(value.value);
-
-//  expenseList.push({name : itemName, value: itemValue, id: counter})
-//  console.log(expenseList)
-// }
 
 
-// Delete functionality 
-let deleteItemFunc = (item) => {
-    // if(item.parentNode){
-    //     item.parentNode.removeChild(item);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // let editItem = document.createElement('a');
+    // editItem.href = '#';
+    // editItem.innerText = ' edit';
+    // editItem.addEventListener('click', () => { 
+    //     editItemFunc(expenseDetails) 
+    // });
+    // let appendEdit = appendOptions.appendChild(editItem);
+
+    // let editItemFunc = (expdet) => {
+    //     for(let i = 0; i < expenseList.length; i++){
+    //         if(expenseList[i].id == expdet.id){
+    //             expenseList.splice(i, 1,  )
+    //             console.log('edit init', expenseList);    
+    //         }
+    //     }
     // }
-    for(let i = 0; i < expenseList.length; i++){
-        if(isDeleteClicked === true){
-            expenseList.splice(i,1)
-        }
-    }
-}
-
-
-
