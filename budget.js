@@ -11,7 +11,6 @@ const expenseValue = document.querySelector("#expensevalue");
 const editAndDelete = document.querySelector("#editanddelete");
 let expenseList = [];
 let regLetters = /^[A-Za-z]+$/;
-let regNumbers = /^[0-9]*$/
 
 const budgetErrorHandling = (inputBudget) => {
   //if user inputs 0 or negative number, create alert, otherwise continue
@@ -92,27 +91,26 @@ const editItemFunc = (arr, expenseDetails) => {
 const expenseErrorHandling = (inputName, inputAmount, e) => {
   if ((!inputName.value && !inputAmount.value) && budgetTotal.innerText <= 0) {
     alert("Must have a budget first !");
-    e[0].stopPropation();
     inputName.value = "";
     inputAmount.value = "";
-  } else if (!inputName.value && !inputAmount.value) { 
+    e[0].stopPropation();
+  } else if (!inputName.value && !parseFloat(inputAmount.value)) { 
     alert("Must give an expense name and amount !");
     e[0].stopPropation();
-    inputName.value = "";
-    inputAmount.value = "";
   }else if(!inputName.value.match(regLetters)) { 
     alert("The expense name must only have letters!");
-    e[0].stopPropation();
     inputName.value = "";
+    e[0].stopPropation();
   }else if (!inputName.value) {
     alert("Must give an expense name!");
-    e[0].stopPropation();
     inputName.value = "";
+    e[0].stopPropation();
   }else if (!parseFloat(inputAmount.value)) {
     alert("Must give an expense amount !");
-    e[0].stopPropation();
     inputAmount.value = "";
-  } else {
+    e[0].stopPropation();
+  }
+  else {
     inputName.value = "";
     inputAmount.value = "";
   }
@@ -137,7 +135,7 @@ const addExpensesList = addExpenseBtn.addEventListener("click", (e) => {
   deleteItem.href = "#";
   deleteItem.className = "deleteitem";
   let deleteIcon = document.createElement('i');
-  deleteIcon.className = "fa-solid fa-circle-minus"
+  deleteIcon.className = "fa-solid fa-circle-minus fa-lg"
   deleteItem.addEventListener("click", () => {
     deleteItemFunc(expenseList, expenseDetails);
   });
@@ -148,7 +146,7 @@ const addExpensesList = addExpenseBtn.addEventListener("click", (e) => {
   editItem.href = "#";
   editItem.className = "edititem";
   let editIcon = document.createElement("i");
-  editIcon.className = "fa-solid fa-pen"
+  editIcon.className = "fa-solid fa-pen fa-lg"
   editItem.addEventListener("click", () => {
     editItemFunc(expenseList, expenseDetails);
   });
