@@ -88,7 +88,7 @@ const editItemFunc = (arr, expenseDetails) => {
 };
 
 const expenseErrorHandling = (inputName, inputAmount, e) => {
-  if (budgetAmount.value <= 0 && (!inputName.value && !inputAmount.value)) {
+  if (budgetAmount.value <= 0) {
     alert("Must have a budget first !");
     e[0].stopPropation();
     inputName.value = "";
