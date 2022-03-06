@@ -20,13 +20,8 @@ const budgetErrorHandling = (inputBudget) => {
       budgetTotal.innerText = inputBudget.value;
     }
 };
-  
-const expenseErrorHandling = (inputName, inputAmount)=> {
-  
-};
 
 const getBudgetAmount = budgetCalculateBtn.addEventListener("click", () => {
-  event.preventDefault();
   budgetTotal.innerText = budgetAmount.value;
   budgetErrorHandling(budgetAmount)
   calculateBalanceTotal();
@@ -92,20 +87,40 @@ const editItemFunc = (arr, expenseDetails) => {
     }
 };
 
+const expenseErrorHandling = (inputName, inputAmount,e)=> {
+  if (!inputName.value && !inputAmount.value) {
+    alert('Must give an expense name and amount !');
+    e[0].stopPropation();
+    inputName.value = ''
+    inputAmount.value = ''
+  }else if(!inputName.value) {
+    alert('Must give an expense name!');
+    e[0].stopPropation();
+    inputName.value = '' 
+  }else if(!parseFloat(inputAmount.value)) {
+    alert('Must give an expense amount !');
+    e[0].stopPropation();
+    inputAmount.value = ''
+    
+  }else {
+    inputName.value = ''
+    inputAmount.value = ''
+  }
+};
 
 
-const addExpensesList = addExpenseBtn.addEventListener("click", () => {
-  event.preventDefault();
+const addExpensesList = addExpenseBtn.addEventListener("click", (e) => {
   let counter = 1 + expenseList.length;
   const expenseDetails = {
     name: expenseName.value,
     value: parseFloat(expenseAmount.value),
     id: counter,
   };
+
+  expenseErrorHandling(expenseName,expenseAmount,e);
   expenseList.push(expenseDetails);
   populateList(expenseList);
-  expenseName.value = ''
-  expenseAmount.value = '';
+  
 
   let options = document.createElement("li");
   let appendOptions = editAndDelete.appendChild(options);
