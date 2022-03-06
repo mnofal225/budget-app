@@ -88,12 +88,17 @@ const editItemFunc = (arr, expenseDetails) => {
 };
 
 const expenseErrorHandling = (inputName, inputAmount, e) => {
-  if (!inputName.value && !inputAmount.value) {
+  if (budgetAmount.value <= 0 && (!inputName.value && !inputAmount.value)) {
+    alert("Must have a budget first !");
+    e[0].stopPropation();
+    inputName.value = "";
+    inputAmount.value = "";
+  } else if (!inputName.value && !inputAmount.value) { 
     alert("Must give an expense name and amount !");
     e[0].stopPropation();
     inputName.value = "";
     inputAmount.value = "";
-  } else if (!inputName.value) {
+  }else if (!inputName.value) {
     alert("Must give an expense name!");
     e[0].stopPropation();
     inputName.value = "";
