@@ -13,44 +13,44 @@ let expenseList = [];
 
 const budgetErrorHandling = (inputBudget) => {
   //if user inputs 0 or negative number, create alert, otherwise continue
-    if(inputBudget.value <= 0) {
-      alert('The budget amount can be zero or less');
-      budgetTotal.innerText = 0;
-    }else{
-      budgetTotal.innerText = inputBudget.value;
-    }
+  if (inputBudget.value <= 0) {
+    alert("The budget amount can be zero or less");
+    budgetTotal.innerText = 0;
+  } else {
+    budgetTotal.innerText = inputBudget.value;
+  }
 };
 
 const getBudgetAmount = budgetCalculateBtn.addEventListener("click", () => {
   budgetTotal.innerText = budgetAmount.value;
-  budgetErrorHandling(budgetAmount)
+  budgetErrorHandling(budgetAmount);
   calculateBalanceTotal();
-  budgetAmount.value = '';
+  budgetAmount.value = "";
 });
 
 const calculateExpenseTotal = () => {
-    let expenseSum  = 0 ;
-    expenseList.forEach(expense => {
-        expenseSum += expense.value
-    })
-    return expenseTotal.innerText = expenseSum;
+  let expenseSum = 0;
+  expenseList.forEach((expense) => {
+    expenseSum += expense.value;
+  });
+  return (expenseTotal.innerText = expenseSum);
 };
 
 const calculateBalanceTotal = () => {
-    balanceTotal.innerText = 
-      parseFloat(budgetTotal.innerText) - parseFloat(expenseTotal.innerText);
+  balanceTotal.innerText =
+    parseFloat(budgetTotal.innerText) - parseFloat(expenseTotal.innerText);
 };
 
 const calculateExpenseAndBalanceTotal = () => {
-    calculateExpenseTotal();
-    calculateBalanceTotal();
+  calculateExpenseTotal();
+  calculateBalanceTotal();
 };
 
 const populateList = (arr) => {
   let itemName = document.createElement("li");
   let itemValue = document.createElement("li");
-  itemName.className = 'itemname'
-  itemValue.className = 'itemvalue'
+  itemName.className = "itemname";
+  itemValue.className = "itemvalue";
   for (i = 0; i < arr.length; i++) {
     itemName.innerText = arr[i].name;
     itemValue.innerText = arr[i].value;
@@ -60,54 +60,52 @@ const populateList = (arr) => {
 };
 
 const deleteItemFunc = (arr, expenseDetails) => {
-    for (let i = 0; i < arr.length; i++) {
-        if (arr[i].id === expenseDetails.id) {
-        arr.splice(i, 1);
-        expenseTitle.removeChild(expenseTitle.children[i]);
-        expenseValue.removeChild(expenseValue.children[i]);
-        editAndDelete.removeChild(editAndDelete.children[i]);
-        calculateExpenseAndBalanceTotal();
-        }
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].id === expenseDetails.id) {
+      arr.splice(i, 1);
+      expenseTitle.removeChild(expenseTitle.children[i]);
+      expenseValue.removeChild(expenseValue.children[i]);
+      editAndDelete.removeChild(editAndDelete.children[i]);
+      calculateExpenseAndBalanceTotal();
     }
-};
-
-const editItemFunc = (arr, expenseDetails) => {
-    let removedItem = [];
-    for (let i = 0; i < arr.length; i++) {
-        if (arr[i].id === expenseDetails.id) {
-        removedItem = arr.splice(i, 1);
-        console.log(removedItem[0]);
-        expenseTitle.removeChild(expenseTitle.children[i]);
-        expenseValue.removeChild(expenseValue.children[i]);
-        editAndDelete.removeChild(editAndDelete.children[i]);
-        calculateExpenseAndBalanceTotal();
-        expenseName.value = removedItem[0].name;
-        expenseAmount.value = removedItem[0].value;;
-        }
-    }
-};
-
-const expenseErrorHandling = (inputName, inputAmount,e)=> {
-  if (!inputName.value && !inputAmount.value) {
-    alert('Must give an expense name and amount !');
-    e[0].stopPropation();
-    inputName.value = ''
-    inputAmount.value = ''
-  }else if(!inputName.value) {
-    alert('Must give an expense name!');
-    e[0].stopPropation();
-    inputName.value = '' 
-  }else if(!parseFloat(inputAmount.value)) {
-    alert('Must give an expense amount !');
-    e[0].stopPropation();
-    inputAmount.value = ''
-    
-  }else {
-    inputName.value = ''
-    inputAmount.value = ''
   }
 };
 
+const editItemFunc = (arr, expenseDetails) => {
+  let removedItem = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].id === expenseDetails.id) {
+      removedItem = arr.splice(i, 1);
+      console.log(removedItem[0]);
+      expenseTitle.removeChild(expenseTitle.children[i]);
+      expenseValue.removeChild(expenseValue.children[i]);
+      editAndDelete.removeChild(editAndDelete.children[i]);
+      calculateExpenseAndBalanceTotal();
+      expenseName.value = removedItem[0].name;
+      expenseAmount.value = removedItem[0].value;
+    }
+  }
+};
+
+const expenseErrorHandling = (inputName, inputAmount, e) => {
+  if (!inputName.value && !inputAmount.value) {
+    alert("Must give an expense name and amount !");
+    e[0].stopPropation();
+    inputName.value = "";
+    inputAmount.value = "";
+  } else if (!inputName.value) {
+    alert("Must give an expense name!");
+    e[0].stopPropation();
+    inputName.value = "";
+  } else if (!parseFloat(inputAmount.value)) {
+    alert("Must give an expense amount !");
+    e[0].stopPropation();
+    inputAmount.value = "";
+  } else {
+    inputName.value = "";
+    inputAmount.value = "";
+  }
+};
 
 const addExpensesList = addExpenseBtn.addEventListener("click", (e) => {
   let counter = 1 + expenseList.length;
@@ -117,35 +115,30 @@ const addExpensesList = addExpenseBtn.addEventListener("click", (e) => {
     id: counter,
   };
 
-  expenseErrorHandling(expenseName,expenseAmount,e);
+  expenseErrorHandling(expenseName, expenseAmount, e);
   expenseList.push(expenseDetails);
   populateList(expenseList);
-  
 
   let options = document.createElement("li");
   let appendOptions = editAndDelete.appendChild(options);
 
   let deleteItem = document.createElement("a");
-    deleteItem.href = "#";
-    deleteItem.innerText = "delete";
-    deleteItem.className = "deleteitem";
-    deleteItem.addEventListener("click", () => {
-        deleteItemFunc(expenseList, expenseDetails);
-    });
-    appendOptions.appendChild(deleteItem);
+  deleteItem.href = "#";
+  deleteItem.innerText = "delete";
+  deleteItem.className = "deleteitem";
+  deleteItem.addEventListener("click", () => {
+    deleteItemFunc(expenseList, expenseDetails);
+  });
+  appendOptions.appendChild(deleteItem);
 
-  let editItem = document.createElement('a');
-    editItem.href = '#';
-    editItem.innerText = ' edit';
-    editItem.className = 'edititem'
-    editItem.addEventListener('click', () => {
-        editItemFunc(expenseList, expenseDetails);
-    });
-    let appendEdit = appendOptions.appendChild(editItem);
+  let editItem = document.createElement("a");
+  editItem.href = "#";
+  editItem.innerText = " edit";
+  editItem.className = "edititem";
+  editItem.addEventListener("click", () => {
+    editItemFunc(expenseList, expenseDetails);
+  });
+  let appendEdit = appendOptions.appendChild(editItem);
 
   calculateExpenseAndBalanceTotal();
 });
-
-
-
-
