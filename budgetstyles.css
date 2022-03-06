@@ -41,6 +41,16 @@
     list-style-type: none;
 }
 
+.deleteitem {
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.edititem {
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
 .itemname {
     color: red;
 }

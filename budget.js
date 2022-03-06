@@ -129,20 +129,24 @@ const addExpensesList = addExpenseBtn.addEventListener("click", (e) => {
 
   let deleteItem = document.createElement("a");
   deleteItem.href = "#";
-  deleteItem.innerText = "delete";
   deleteItem.className = "deleteitem";
+  let deleteIcon = document.createElement('i');
+  deleteIcon.className = "fa-solid fa-circle-minus"
   deleteItem.addEventListener("click", () => {
     deleteItemFunc(expenseList, expenseDetails);
   });
+  deleteItem.appendChild(deleteIcon)
   appendOptions.appendChild(deleteItem);
 
   let editItem = document.createElement("a");
   editItem.href = "#";
-  editItem.innerText = " edit";
   editItem.className = "edititem";
+  let editIcon = document.createElement("i");
+  editIcon.className = "fa-solid fa-pen"
   editItem.addEventListener("click", () => {
     editItemFunc(expenseList, expenseDetails);
   });
+  editItem.appendChild(editIcon);
   let appendEdit = appendOptions.appendChild(editItem);
 
   calculateExpenseAndBalanceTotal();
