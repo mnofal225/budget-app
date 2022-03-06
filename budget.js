@@ -10,6 +10,8 @@ const expenseTitle = document.querySelector("#expensetitle");
 const expenseValue = document.querySelector("#expensevalue");
 const editAndDelete = document.querySelector("#editanddelete");
 let expenseList = [];
+let regLetters = /^[A-Za-z]+$/;
+let regNumbers = /^[0-9]*$/
 
 const budgetErrorHandling = (inputBudget) => {
   //if user inputs 0 or negative number, create alert, otherwise continue
@@ -98,11 +100,15 @@ const expenseErrorHandling = (inputName, inputAmount, e) => {
     e[0].stopPropation();
     inputName.value = "";
     inputAmount.value = "";
+  }else if(!inputName.value.match(regLetters)) { 
+    alert("The expense name must only have letters!");
+    e[0].stopPropation();
+    inputName.value = "";
   }else if (!inputName.value) {
     alert("Must give an expense name!");
     e[0].stopPropation();
     inputName.value = "";
-  } else if (!parseFloat(inputAmount.value)) {
+  }else if (!parseFloat(inputAmount.value)) {
     alert("Must give an expense amount !");
     e[0].stopPropation();
     inputAmount.value = "";
