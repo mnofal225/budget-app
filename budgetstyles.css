@@ -1,3 +1,9 @@
+.main-section {
+    padding: 50px;
+    text-align: center;
+    background-color: #474e5d;
+    color: white;
+  }
 .mainbudget {
     border: 2px solid green;
     background-color: rgb(241, 255, 241);
